@@ -1,5 +1,27 @@
 $(function() {
     init();
+
+$('#toggleSelect').on('click',function(){
+            var selectResVal = selectRes.find('option:selected').val();
+            console.log(selectResVal);
+            var xParam = selectResVal.split('x')[0];
+            var yParam = selectResVal.split('x')[1];
+
+            if(xParam > 0 || yParam > 0){
+                if (toggleViewPort) {
+                    viewPort.width(yParam).height(xParam);
+                    toggleViewPort = 0;
+                }
+                else{
+                    viewPort.width(xParam).height(yParam);
+                    toggleViewPort = 1;
+                }
+            }
+            else{
+                alert("Select a dropdown value from 'Device Type'");
+            }
+
+        });
 });
 
 
@@ -38,18 +60,27 @@ $(function() {
     function customVPSize(){
         inputWidth.on('keyup',function(){
             var foo = inputWidth.val();
-            if(foo >= 0 && foo <= 5000)
+            if(foo >= 0 && foo <= 5000){
                 viewPort.width(foo);
-            else
-                alert('Enter value less than 5000')
+            }
+
+            else{
+               alert('Enter value less than 3000');
+               e.preventDefault();
+            }
         })
 
-        inputHeight.on('keyup',function(){
+        inputHeight.on('keyup',function(e){
             var bar = inputHeight.val();
-            if(bar >= 0 && bar <= 3000)
+            if(bar >= 0 && bar <= 3000){
                 viewPort.height(bar);
-            else
-                alert('Enter value less than 3000')
+            }
+
+            else{
+                alert('Enter value less than 3000');
+                e.preventDefault();
+            }
+
         })
 
     }//customVPSize
@@ -77,7 +108,7 @@ $(function() {
             viewPort.width(yParam).height(xParam);
             toggleViewPort = 0;
         }
-        else {
+        else{
             viewPort.width(xParam).height(yParam);
             toggleViewPort = 1;
         }
@@ -104,7 +135,7 @@ $(function() {
 
       //------Append JSON val based on ABOVE Condition------
         selectRes.empty();
-        selectRes.append('<option>Other ' + DeviceTxt + ' resolution</option>');
+        selectRes.append('<option value="0">Other ' + DeviceTxt + ' resolution</option>');
 
         $.each(JSONObj, function(key, val) {
             selectRes.append('<option>' + val.xWidth + 'x' + val.yHeight + '</option>');
@@ -113,13 +144,7 @@ $(function() {
 
 
       //------Change Viewport from JSON val using <select>ed val------
-        selectRes.on('change', function() {
-            inputWidth.val('');
-            inputHeight.val('');
-            var xParam = $(this).val().split('x')[0];
-            var yParam = $(this).val().split('x')[1];
-            viewPort.width(xParam).height(yParam);
-        });//<select> change event
+        selectRes.on('change', selectJSONOBJ);//<select> change event
 
 
 
@@ -146,6 +171,17 @@ function init(){
     customVPSize();
 }
 
+function selectJSONOBJ(){
+    inputWidth.val('');
+    inputHeight.val('');
+    var xParam = $(this).val().split('x')[0];
+    var yParam = $(this).val().split('x')[1];
+    viewPort.width(xParam).height(yParam);
+}
+
+
+
+//http://stackoverflow.com/questions/979662/how-to-detect-pressing-enter-on-keyboard-using-jquery
 function validateNumber() {
     //attach keypress to input
     $('#inputVP input').keydown(function(event) {
