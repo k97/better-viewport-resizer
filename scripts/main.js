@@ -1,28 +1,30 @@
+// Avoid `console` errors in browsers that lack a console.
+(function() {
+    var method;
+    var noop = function () {};
+    var methods = [
+        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+        'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
+
+
 $(function() {
     init();
-
-$('#toggleSelect').on('click',function(){
-            var selectResVal = selectRes.find('option:selected').val();
-            console.log(selectResVal);
-            var xParam = selectResVal.split('x')[0];
-            var yParam = selectResVal.split('x')[1];
-
-            if(xParam > 0 || yParam > 0){
-                if (toggleViewPort) {
-                    viewPort.width(yParam).height(xParam);
-                    toggleViewPort = 0;
-                }
-                else{
-                    viewPort.width(xParam).height(yParam);
-                    toggleViewPort = 1;
-                }
-            }
-            else{
-                alert("Select a dropdown value from 'Device Type'");
-            }
-
-        });
-});
+});//DOM Ready
 
 
 
@@ -39,6 +41,9 @@ $('#toggleSelect').on('click',function(){
     MobObj = [{"xWidth":"400","yHeight":"800"},{"xWidth":"480","yHeight":"800"},{"xWidth":"720","yHeight":"1280"},{"xWidth":"540","yHeight":"960"},{"xWidth":"720","yHeight":"720"}],
 
     toggleViewPort,
+    navHolder = $('nav'),
+    contentIframe = $('#content'),
+    mainContent = $('#inputURL'),
     viewPort = $('#prjContainer'),
     mobRes = $('#mobileRes'),
     resetViewPort = $('#resReset'),
@@ -50,12 +55,55 @@ $('#toggleSelect').on('click',function(){
     inputHeight = $('#inputHeight');
 
 
-    function ViewPortSizeChange(){
+    function URLinit(event){
+        var urlParam = $('#urlVal').val();
+        event.preventDefault();
+        navHolder.slideDown();
+        mainContent.hide();
+        contentIframe.attr('src',urlParam);
 
-        //To Show Current Window Size for ICON selection & Select Toggles
+    }
+    function CloseViewport(event){
+        location.reload();
+    }
 
 
-    }//ViewPortSizeChange
+
+
+
+
+
+    function ToggleInfoScreen(){
+        $('#printInfo').slideToggle();
+        $('#closeAppInfo').on('click',function(){
+            console.log('asdasd');
+            $('#printInfo').slideUp();
+        });
+    }
+
+    function ToggleSelectJSON(){
+        var selectResVal = selectRes.find('option:selected').val();
+        console.log(selectResVal);
+        var xParam = selectResVal.split('x')[0];
+        var yParam = selectResVal.split('x')[1];
+
+        if(xParam > 0 || yParam > 0)
+        {
+            if (toggleViewPort) {
+                viewPort.width(yParam).height(xParam);
+                toggleViewPort = 0;
+            }
+            else{
+                viewPort.width(xParam).height(yParam);
+                toggleViewPort = 1;
+            }
+        }
+        else{
+            alert("Select a dropdown value from 'Device Type'");
+        }
+
+    }//ToggleSelectJSON
+
 
     function customVPSize(){
         inputWidth.on('keyup',function(){
@@ -160,15 +208,21 @@ $('#toggleSelect').on('click',function(){
 ----------------------------------------------------------------------*/
 
 function init(){
+    $('#formURL').submit(URLinit);
+    $('#closeViewport').on('click',CloseViewport);
+
     changeScreenSize(mobRes, 480, 320);
     changeScreenSize(tabRes, 1024, 600);
     changeScreenSize(laptopRes, 1366, 768);
     changeScreenSize(desktopRes, 1920, 1200);
     changeScreenSize(resetViewPort, '100%', '100%');
 
-    ViewPortSizeChange();
+    $('#toggleSelect').on('click',ToggleSelectJSON);
+    $('#appInfo').on('click',ToggleInfoScreen);
+
     validateNumber();
     customVPSize();
+
 }
 
 function selectJSONOBJ(){

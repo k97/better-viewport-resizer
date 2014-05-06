@@ -50,7 +50,46 @@
     background: linear-gradient(to bottom, @colorOne 0%,@colorTwo 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@colorOne', endColorstr='@colorTwo',GradientType=0 );
 }
+#printInfo{
+    display: none;
+    .ZeroPadMar;
+    background: #fff;
+        font-family: 'Segoe UI', 'Helvetica Neue', Calibri,Tahoma,sans;
+        text-align: center;
+        h1{
+            font-size:  16px;
+            color:#222;
+        }
+        h2{
+            font-size:  13px;
+            font-weight: normal;
+            color:#444;
+        }
+        a{
+            text-decoration: none;
+            color:@navBG;
+        }
+        a:hover,a:active{
+            border-bottom:1px solid @navBGTwo;
+            padding-bottom: 1px;
+        }
+        #closeAppInfo{
+            cursor: pointer;
+            float: right;
+            display: block;
+            font-weight: normal;
+            font-size: 15px;
+            margin-top: -25px;
+            margin-right: 20px;
+            background:@navBG;
+            padding:4px 10px;
+            color:#fff;
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
 
+        }
+}
 /*------------------------------------------------------------------
 [Common Styles]
 -------------------------------------------------------------------*/
@@ -104,7 +143,7 @@ nav{
     .linearGradient(@navBG,@navBGTwo);
     clear:both;
     height: 38px;
-
+    display: none;
 }
 
 .ctrlBtn{
@@ -160,7 +199,9 @@ nav{
 
 
 }
-
+.moveRight{
+    float: right;
+}
 .ctrlBtn:hover{
      background: darken(@navBG, 5%);
     span{
@@ -211,3 +252,85 @@ nav{
 :-ms-input-placeholder {
     font-size:13px;
 }
+
+
+
+#inputURL {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 405px;
+    height: 110px;
+    margin-top: -110px; /* Half the height */
+    margin-left: -203px; /* Half the width */
+    z-index:9;
+
+    #inputURLIMG{
+        margin-bottom: 15px;
+    }
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    input {
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: 1.5em;
+        margin: 0;
+        outline: none;
+        padding: 0;
+        -webkit-appearance: none;
+    }
+
+    input[type="url"] {
+        -webkit-appearance: textfield;
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+    input[type="url"]::-webkit-search-cancel-button,
+    input[type="url"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+
+    input {
+        float: left;
+    }
+
+    input[type="url"],
+    input[type="submit"] {
+        border-radius: 1px;
+        font-size: 12px;
+    }
+
+
+    input[type="url"] {
+        background: #fff;
+        color: #42454e;
+        min-width: 300px;
+        padding: 10px 14px;
+        border:1px solid #ccc;
+        float: left;
+    }
+
+    input[type="submit"] {
+        background: #1bba9a;
+        color: #fff;
+        font-weight: bold;
+        margin-left: -1px;
+        padding: 11px 25px;
+        float: left;
+    }
+
+    input[type="submit"]:hover {background: #189e83;}
+
+    input[type="url"]::-webkit-input-placeholder { color: #888; }
+    input[type="url"]:-moz-placeholder { color: #888; }
+    input[type="url"]:-ms-input-placeholder { color: #888; }
+
+}//inputURL

@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"><!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Better Viewport Resizer</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-Frame-Options" content="deny">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-        <link rel="stylesheet" href="css/main.css">
-
+        <link rel="stylesheet" href="css/main-min.css">
+        <!-- LESS File
         <link rel="stylesheet/less" type="text/less" href="less/main.less" />
+        <script src="scripts/vendor/less-1.6.3.min.js"></script>-->
 
-        <script src="scripts/vendor/less-1.6.3.min.js"></script>
-        <script src="scripts/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+        <div id="printInfo">
+            <h1>Better Viewport Resizer</h1>
+            <div id="closeAppInfo">X</div>
+            <h2>Build by <a href="https://twitter.com/karthik_97" target="_blank">@karthik_97</a> &amp; <a href="https://twitter.com/Senthil_2518" target="_blank">@Senthil_2518</a></h2>
 
+        </div><!--printInfo-->
 
         <!--Viewport Ctrl-->
         <nav>
@@ -75,62 +79,65 @@
             </div><!--Customise Res-->
 
 
+            <div class="ctrlBtn moveRight" id="closeViewport">
+                <span class="ico-close"></span>
+            </div><!--Close-->
 
-            <div class="ctrlBtn " title="Download Viewport as PDF">
+            <div class="ctrlBtn moveRight" title="Download Viewport as PDF">
                 <span class="ico-file-pdf"></span>
             </div><!--SnapShot-->
 
 
 
-            <div id="icoPrint" class="ctrlBtn" title="Print Viewport">
+            <div id="icoPrint" class="ctrlBtn  moveRight" title="Print Viewport"  onClick="window.print()">
                 <span class="ico-print"></span>
             </div><!--Print-->
 
 
 
-            <div class="ctrlBtn ">
+            <div class="ctrlBtn moveRight" id="appInfo">
                 <span class="ico-info"></span>
             </div><!--Info-->
 
 
 
-            <div class="ctrlBtn ">
-                <span class="ico-github"></span>
+            <div class="ctrlBtn moveRight">
+                <a href="https://github.com/k97/better-viewport-resizer" target="_blank">
+                    <span class="ico-github"></span>
+                </a>
             </div><!--Github-->
-
-
-
-            <div class="ctrlBtn ">
-                <span class="ico-close"></span>
-            </div><!--Close-->
-
-
-
-
         </nav>
 
+       <div class="clear"></div>
+
+       <main>
+        <div id="inputURL">
+            <img src="assets/img/vp.png" alt="Viewport Resizer" id="inputURLIMG"/>
+            <form  method="GET" id="formURL">
+
+                <fieldset class="clearfix">
+
+                    <input type="url" name="url" id="urlVal" placeholder="Enter URL here" required>
+                    <input type="submit" value="GO" id="urlBtn" class="button">
+
+                </fieldset>
+
+            </form>
+        </div>
+       </main>
+
+
+       <div class="clear"></div>
+
         <div id="prjContainer">
-           <iframe id="content" name="content" frameborder="0" src="http://localhost:8080/" style="background-color: rgb(255, 255, 255);"></iframe>
+           <iframe id="content" sandbox="allow-scripts allow-forms" name="content" frameborder="0" src=""></iframe>
 
-        </div><!--/prjContainer-->
-        <canvas>
-        </canvas>
-
-
-
-
-
-
-
-
-
-
+        </div><!--/prjContainer -->
 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="scripts/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-         <script src="scripts/plugins.js"></script>
-        <script src="scripts/main.js"></script>
+        <script src="scripts/core-min.js"></script>
 
 
 
